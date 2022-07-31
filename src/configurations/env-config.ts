@@ -1,9 +1,15 @@
-export const EnvConfig = () => ({
-  dbHost: process.env.DB_HOST,
-  dbPort: +process.env.DB_PORT,
-  dbUser: process.env.DB_USER,
-  dbPassword: process.env.DB_PASSWORD,
-  dbRootPassword: process.env.DB_PASSWORD_ROOT,
-  dbDatabase: process.env.MYSQL_DATABASE,
+import { registerAs } from '@nestjs/config';
+
+const EnvConfig = () => ({
+  port: process.env.PORT,
+  mysql: {
+    host: process.env.DB_HOST,
+    port: +process.env.DB_PORT,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  },
   jwtSecret: process.env.JWT_SECRET,
 });
+
+export default registerAs('config', EnvConfig);
